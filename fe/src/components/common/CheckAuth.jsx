@@ -19,7 +19,7 @@ const CheckAuth = ({isAuthen,user,children}) => {
   if(isAuthen && user?.role !== 'admin' && location.pathname.includes('admin')){
     return <Navigate to={'/anauth-page'}/>
   }
-  if(isAuthen && user?.role === 'admin' && location.pathname.includes('shope')){
+  if(isAuthen && user?.role === 'admin' && location.pathname.includes('shop')){
   return <Navigate to={'/admin/dashboard'}/>
   }
   return (
