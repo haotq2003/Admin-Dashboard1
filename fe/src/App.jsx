@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -20,13 +20,20 @@ import ShoppingCheckOut from './page/shopping-view/CheckOut'
 import ShoppingListing from './page/shopping-view/list'
 import CheckAuth from './components/common/CheckAuth'
 import UnauthPage from './page/UnauthPage'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { checkAuth } from './redux/slice/AuthSlice'
+import { Skeleton } from "@/components/ui/skeleton"
 
 function App() {
  
    
-    const {isAuthenticated,user} = useSelector(state => state.auth)
-    
+    const {isAuthenticated,user,isLoading} = useSelector(state => state.auth)
+    const dispatch = useDispatch();
+    useEffect(()=>{
+   dispatch(checkAuth())
+    },[dispatch]);
+    if(isLoading) return <Skeleton className="w-[600px] h-[600px] " />
+
   return (
     
       <div className='flex flex-col overflow-hidden bg-white'>
